@@ -1,0 +1,100 @@
+:root {
+  --light-gray: #d3d3d3;
+  --light-green: #bcd2ad;
+  --green: #018001;
+  --light-green-hover: #96b87e;
+  --white: #fff;
+}
+
+body {
+  font-family: Calibri, sans-serif;
+  margin: 0;
+}
+
+.login_card {
+  margin: 20px;
+  border-radius: 15px;
+  overflow: auto;
+}
+
+.input_card {
+  background-color: var(--light-gray);
+  height: 420px;
+  padding-top: 80px;
+  position: relative;
+}
+
+.title {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.logo_card {
+  background-color: var(--light-green);
+  height: 450px;
+  padding-top: 50px;
+  display: grid;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 800px) {
+
+  .input_card {
+    width: 50%;
+    float: left;
+  }
+  
+  .logo_card {
+    margin-left: 50%;
+  }
+}
+
+.login_input_form {
+  display: grid;
+  justify-content: center;
+}
+
+.login_input_field {
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  border: 2px solid var(--green);
+  margin: 5px auto;
+  width: 90%;
+}
+
+.login_input_button {
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  margin: 15px auto 5px auto;
+  width: 50%;
+  background-color: var(--light-green);
+  border: none;
+  border-bottom: 3px solid var(--green);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.3s;
+}
+
+.login_input_button:hover {
+  background-color: var(--light-green-hover);
+}
+
+.login_card_footer {
+  background-color: var(--green);
+  color: var(--white);
+  text-align: center;
+  padding: 10px 0;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+}
+
+.logo_card_img {
+  width: 250px;
+}

@@ -1,0 +1,640 @@
+/* ------------------------------------------ Allgemein ------------------------------------------ */
+body {
+    font-family: Calibri, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-image: url(http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo_Background_Repeat.png);
+    background-size: 50%;
+    background-attachment: fixed;
+    
+    
+  }
+  header {
+    background-color: #bcd2ad;
+    height: 50px;
+    position: sticky;
+    top: 0px;
+    box-shadow: 0px 2px 25px silver;
+    z-index: 5;
+  }
+  
+  .HeadLogo {
+    height: 50px;
+    width: auto;
+  
+  }
+  
+  #LogIn {
+    color: white;
+    float: right;
+    font-size: 200%;
+    margin: 0.25% 0;
+    text-align: right;
+    padding-right: 3%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .dropdown {
+    float: right;
+  }
+  
+  /* ul {
+    transform-origin: top;
+    transform: perspective(1000px) rotateX(-90deg);
+    transition: 0.5s;
+    margin-top: 23%;
+    margin-bottom: -50%;
+    
+  }
+  
+  ul.active {
+    transform: perspective(1000px) rotateX(0deg);
+  }
+  
+  ul li {
+    list-style: none;
+  }
+  
+  ul li a {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    background: #a4c3b2;
+    text-decoration: none;
+    color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    cursor: pointer;
+  }
+  
+  ul li a:hover {
+    background: lightseagreen;
+    transition: 0.5s;
+  } */
+  
+  footer {
+    background-color: lightgray;
+    height: 50px;
+    position: sticky;
+    bottom: 0;
+    box-shadow: 0px 15px 25px silver;
+  }
+  .NavigationContainer {
+    margin: 0 auto;
+    width: fit-content;
+  }
+  
+  #circle1, #circle2, #circle3 {
+    border: 4px solid darkgray;
+    border-radius: 25px;
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  /* ------------------------------------------ HomePage ------------------------------------------ */
+  
+  #ContentHome {
+    background-color: white;
+    padding: 1% 3%;
+    box-shadow: 0px 15px 25px silver;
+    min-height: 1500px;
+  }
+  
+  #changeName, #changePwd, #changePic, #changeBio, #changeMail, #deletePic, #setHabit, #addGate, #postGoal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+    z-index: 100;
+    position: fixed;
+    width: 36.875%;
+    background-color: #fbfbfb99;
+    padding: 5%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #formName {
+    display: grid;
+    align-items: center;
+    width: 200%;
+    margin-left: -50%;
+  }
+  
+  #changeEingabe {
+    font-size: 150%;
+    width: 93%;
+    border-radius: 10px;
+    padding: 3%;
+    margin-bottom: 15%;
+  }
+  
+  #formNameButtons {
+    width: 100%;
+    float: left;
+    margin: 5% auto;
+    font-size: 150%;
+    background-color: #a4c3b2;
+    border: none;
+    padding: 3%;
+    border-radius: 20px;
+    color: white;
+    border-bottom: 3px solid darkgreen;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #PostHome {
+    background-color: #eaf4f4;
+    margin: 4% 0;
+    padding: 2% 3%;
+    border-radius: 20px;
+    box-shadow: 0px 15px 25px silver;
+  }
+  
+  /* #UsernameHome {
+    font-size: 150%;
+    font-weight: bold;
+    background-color: #cce3de;
+    padding: 1% 4%;
+    border-radius: 15px;
+    margin-bottom: 1%;
+  } */
+  
+  /* #BioHome {
+    font-size: 80%;
+    font-weight: normal;
+    margin: 1% 0;
+  } */
+  
+  #StatsHome {
+    float: right;
+    margin-top: -20%;
+    font-weight: normal;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #StatsHome div {
+    margin: 0 3%;
+    width: 20%;
+    height: 20%;
+  }
+  
+  /* #followingLi {
+    background-color: whitesmoke;
+    color: black;
+    padding: 2%;
+    border-radius: 15px;
+  } */
+  
+  #Hase_Fortschritt {
+    
+    height: 30px;
+  }
+  
+  /* #NameHome {
+    float: left;
+    display: contents;
+  } */
+  
+  #Emoji_Karotte {
+    float: right;
+    display: contents;
+  }
+  
+  /* #GoalHome {
+    background-color: #cce3de;
+    padding: 1% 4%;
+    border-radius: 15px;
+    margin-bottom: 1%;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+  } */
+  
+  #Derzeitiges_ZielHome, #Derzeitiges_ZielHome1, #Derzeitiges_ZielHome2, #Derzeitiges_ZielHome3 {
+    margin-left: 5%;
+    background-color: #a4c3b2;
+    padding: 1% 3%;
+    margin: -1% 0 -1% 3%;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  #Derzeitiges_ZielHome {
+    padding-top: 3%;
+  }
+  
+  #ProgressHome, #ProgressHome1, #ProgressHome2, #ProgressHome3 {
+    background-color: #cce3de;
+    padding: 1% 4%;
+    border-radius: 15px;
+    margin-bottom: 1%;
+    overflow: auto;
+    max-height: 250px;
+  }
+  
+  #Karotten {
+    margin-left: 5%;
+    background-color: #a4c3b2;
+    padding: 3%;
+    margin: -1% 0;
+    border-radius: 15px;
+    width: 15%;
+  }
+  
+  #Add_Progress {
+    margin-left: 5%;
+    background-color: #e9ecef;
+    padding: 1%;
+    margin: -1% 0;
+    border-radius: 15px;
+    border-bottom: 3px solid gray;
+    width: 15%;
+  }
+  
+  #habitSelection2, #habitSelection3, #habitSelection4, #habitSelection5, #categ {
+    margin: 6% 0;
+    background-color: white;
+    padding: 5%;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 2.5em;
+  }
+  #habitSelection2 {
+    background-color: #ffd7ba;
+  }
+  #habitSelection3 {
+    background-color: #E2F0D9;
+  }
+  #habitSelection4 {
+    background-color: #FFF2CC;
+  }
+  #habitSelection5 {
+    background-color: #DEEBF7;
+  }
+  
+  #formName select {
+    font-size: 100%;
+    width: 80%;
+    border-radius: 20px;
+  }
+
+:root {
+    --lighter-gray: #f0f0f0;
+    --gray: #a0a0a0;
+    --dark-gray:#616161;
+    --white: #fff;
+    --red: #ff131b;
+    --light-red: #e68a8d;
+    --light-red-hover: #da6b6e;
+    --light-green: #bcd2ad;
+    --green: #018001;
+    --light-green-hover: #96b87e;
+    --transparent: #00000066;
+}
+
+body {
+    font-family: Calibri, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-image: url(http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo_Background_Repeat.png);
+    background-size: 50%;
+    background-attachment: fixed;
+}
+
+.header {
+    background-color: var(--light-green);
+    height: 50px;
+    position: sticky;
+    top: 0px;
+    box-shadow: 0px 2px 25px silver;
+    z-index: 5;
+}
+
+#circle1, #circle2, #circle3 {
+    border: 4px solid darkgray;
+    border-radius: 25px;
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+
+  .NavigationContainer {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+.background {
+    padding: 30px;
+}
+
+.outer {
+    background-color: var(--white);
+    box-shadow: 0px 15px 25px silver;
+    min-height: 1500px;
+    display: block;
+}
+
+.head_img {
+    height: 50px;
+    width: auto;
+}
+
+.search {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    width: 90%;
+    padding: 1% 5%;
+    max-width: 943px;
+    z-index: 4;
+}
+
+.search_outer {
+    align-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 120px;
+}
+
+.green_btn {
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    display: block;
+    width: 50%;
+    background-color: var(--light-green);
+    border: none;
+    border-bottom: 3px solid var(--green);
+    color: var(--white);
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
+}
+
+.btn_middle {
+    margin: 0 20px 0 20px;
+}
+  
+.green_btn:hover {
+    background-color: var(--light-green-hover);
+}
+  
+.green_input {
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    border: 2px solid var(--green);
+    width: 90%;
+}
+  
+.red {
+    background-color: var(--light-red);
+    border-bottom: 3px solid var(--red);
+}
+  
+.red:hover {
+    background-color: var(--light-red-hover);
+}
+
+.profile_card {
+    background-color: var(--lighter-gray);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 50px;
+  }
+  
+  .profile_img {
+    height: auto;
+    width: 100%;
+    border-radius: 30px;
+    display: flex;
+  }
+  
+  .profile_name {
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .profile_creation {
+    font-size: 15px;
+    color: var(--gray);
+    margin-top: 0;
+  }
+  
+  .profile_bio {
+    font-size: 20px;
+  }
+  
+  .profile_bio_card {
+    margin: 50px 0 50px 0;
+  }
+  
+  .stats_card {
+    background-color: var(--lighter-gray);
+    margin-top: 25px;
+    border-radius: 15px;
+    padding: 20px;
+  }
+  
+  .stat {
+    text-align: center;
+    border-radius: 10px;
+    overflow: auto;
+    width: 100%;
+  }
+  
+  .stat_red {
+    background: linear-gradient(var(--light-red) 50%, var(--white) 50%);
+  }
+  
+  .stat_green {
+    background: linear-gradient(var(--light-green) 50%, var(--white) 50%);
+  }
+  
+  .stat_title {
+    color: var(--white);
+    margin: 6px 0 10px 0;
+  }
+  
+  .stat_number {
+    font-weight: bold;
+    margin: 10px 0 6px 0;
+  }
+  
+  .stat_middle {
+    margin: 20px 0 20px 0;
+  }
+  
+  .stat_show_card {
+    background-color: var(--white);
+    margin-top: 25px;
+    padding: 0 25px;
+    border-radius: 15px;
+    overflow: auto;
+    max-height: 250px;
+  }
+  
+  .stat_show_item {
+    background-color: var(--lighter-gray);
+    padding: 15px;
+    border-radius: 15px;
+    margin: 10px 0 10px 0;
+  }
+  
+  .stat_show_title {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .checkmark {
+    color: var(--light-green)
+  }
+  
+  .hidden {
+    visibility: hidden;
+  }
+
+.scroll_content {
+    margin-top: 500px;
+}
+
+@media only screen and (min-width: 800px) {
+
+    .profile_img_card {
+      width: 50%;
+      height: 350px;
+      float: left;
+    }
+    
+    .profile_bio_card {
+      margin-left: 50%;
+      height: 330px;
+      margin-top: 20px;
+    }
+  
+    .profile_img {
+      height: 100%;
+      width: auto;
+    }
+  
+    .stats_card_items {
+      justify-content: center;
+      align-content: center;
+      display: flex;
+      margin-top: 50px;
+    }
+  
+    .stat {
+      width: 30%;
+    }
+  
+    .stat_middle {
+      margin: 0 20px 0 20px;
+    }
+  }
+
+
+
+
+
+
+#ContentSearch {
+    background-color: #e7daff99;
+    padding: 1% 3%;
+    box-shadow: 0px 15px 25px silver;
+    min-height: 1500px;
+}
+
+#PostSearch {
+    background-color: #eaf4f4;
+    margin: 4% 2%;
+    padding: 2% 3%;
+    border-radius: 20px;
+    box-shadow: 0px 15px 25px silver;
+    display: grid;
+}
+
+/* #UsernameSearch {
+    font-size: 150%;
+    font-weight: bold;
+    background-color: #d3d3d3;
+    padding: 1% 4%;
+    border-radius: 15px;
+    margin-bottom: 1%;
+    text-align: center;
+    width: 50%;
+} */
+
+#NameSearch {
+    float: left;
+    display: grid;
+    font-weight: bold;
+}
+
+/* #sort {
+    background-color: #d3d3d3;
+    padding: 1% 4%;
+    border-radius: 15px;
+    width: 40%;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+} */
+
+/* #Derzeitiges_ZielSearch {
+    margin-left: 5%;
+    background-color: #a4c3b2;
+    padding: 1%;
+    margin: -1% 0 -1% 3%;
+    border-radius: 20px;
+    float: right;
+}*/
+
+#ProfilbildSearch {
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    display: grid;
+}
+
+#Derzeitiges_ZielSearch {
+    padding: 3% 5%;
+    text-align: center;
+    margin: -1.25%;
+    width: 37%;
+    max-width: 200px;
+    border-radius: 20px;
+
+}
+
+@media only screen and (max-width: 500px) {
+    #Derzeitiges_ZielSearch {
+        margin: 2%;
+    }
+
+}

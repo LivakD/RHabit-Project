@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RHabit. - Log In.</title>
+  <link rel="icon" href="{% static 'imgs/RH-Title.png' %}">
+  <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+</head>
+<body>
+  <div class="login_card">
+    <div class="input_card">
+      <h1 class="title">
+        {% if mode == 'signup' %} Sign Up.
+        {% else %} Log In. {% endif %}
+      </h1>
+      <form action="" method="post" class="login_input_form">
+        {% csrf_token %}
+        <input type="text" name="uname" placeholder="Username" class="login_input_field" required>
+        {% if mode == 'signup' %}
+          <input type="email" name="email" placeholder="E-Mail" class="login_input_field" required>
+        {% endif %}
+        <input type="password" name="pwd" placeholder="Passwort" class="login_input_field" required>
+        <button type="submit" class="login_input_button">
+          {% if mode == 'signup' %} Sign Up.
+          {% else %} Log In. {% endif %}
+        </button>
+      </form>
+      {% if mode == 'signup' %}
+        <a href="/login/"><div class="login_card_footer">Du hast bereits einen Account? Dann logge dich <strong>hier</strong> ein!</div></a>
+      {% else %}
+      <a href="/signup/"><div class="login_card_footer">Noch keinen Account? Registriere dich <strong>hier!</strong></div></a>
+      {% endif %}
+    </div>
+    <div class="logo_card">
+      <img src="{% static 'imgs/RHabit_Schriftzug.png' %}" alt="Rhabit. Logo" class="logo_card_img">
+      <img src="{% static 'imgs/Logo.png' %}" alt="Rhabit. Logo" class="logo_card_img">
+    </div>
+  </div>
+</body>
+</html>

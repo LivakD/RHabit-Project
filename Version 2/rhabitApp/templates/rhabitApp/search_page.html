@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'styles/search.css' %}">
+  <title>Search</title>
+  <script>
+  //   function showFollowing () {
+  //     document.getElementById("ProgressHome2").setAttribute("style", "display: none;");
+  //     document.getElementById("ProgressHome3").setAttribute("style", "display: none;");
+
+  //     document.getElementById("ProgressHome1").setAttribute("style", "display: block; background-color: white; box-shadow: 0px 2px 25px silver;");
+  //     document.getElementById("Derzeitiges_ZielHome1").setAttribute("onclick", "hideFollowing ()");
+  // }
+
+  // function hideFollowing () {
+  //     var hideFollowing = document.getElementById("ProgressHome1").setAttribute("style", "display: none;");
+
+  //     var changeFunction = document.getElementById("Derzeitiges_ZielHome1").setAttribute("onclick", "showFollowing ()");
+  // }
+
+  // function showFollower () {
+  //     var hideFollowing = document.getElementById("ProgressHome1").setAttribute("style", "display: none;");
+  //     var hideReached = document.getElementById("ProgressHome3").setAttribute("style", "display: none;");
+
+  //     var showFollower = document.getElementById("ProgressHome2").setAttribute("style", "display: block; background-color: white; box-shadow: 0px 2px 25px silver;");
+  //     var changeFunction = document.getElementById("Derzeitiges_ZielHome2").setAttribute("onclick", "hideFollower ()");
+  // }
+
+  // function hideFollower () {
+  //     var hideFollower = document.getElementById("ProgressHome2").setAttribute("style", "display: none;");
+
+  //     var changeFunction = document.getElementById("Derzeitiges_ZielHome2").setAttribute("onclick", "showFollower ()");
+  // }
+
+  // function showReached () {
+  //     var hideFollowing = document.getElementById("ProgressHome1").setAttribute("style", "display: none;");
+  //     var hideFollower = document.getElementById("ProgressHome2").setAttribute("style", "display: none;");
+
+  //     var showReached = document.getElementById("ProgressHome3").setAttribute("style", "display: block; background-color: #a2e3c4; box-shadow: 0px 2px 25px silver;");
+  //     var changeFunction = document.getElementById("Derzeitiges_ZielHome3").setAttribute("onclick", "hideReached ()");
+  // }
+
+  // function hideReached () {
+  //     var hideReached = document.getElementById("ProgressHome3").setAttribute("style", "display: none;");
+
+  //     var changeFunction = document.getElementById("Derzeitiges_ZielHome3").setAttribute("onclick", "showReached ()");
+  // }
+
+  // function change (idForm) {
+  //     var show = document.getElementById(idForm).setAttribute("style", "display: grid;");
+  // }
+
+  // function hide (idForm) {
+  //     var hide = document.getElementById(idForm).setAttribute("style", "display: none;");
+  // }
+
+  // function showDetail (user) {
+  //     var show = document.getElementById(user).setAttribute("style", "display: grid;");
+  // }
+
+  // function hideDetail (user) {
+  //     var show = document.getElementById(user).setAttribute("style", "display: none;");
+  // }
+  </script>
+</head>
+<body>
+  <div class="outer">
+    <div class="header">
+      <img class="head_img" src="{% static 'imgs/Logo_Schriftzug.png' %}" alt="Rhabit. Logo">
+    </div>
+    <div class="background">
+      <div class="search_outer">
+        <form action="" method="post" class="search">
+          {% csrf_token %}
+          <input type="text" class="green_input" name="search" placeholder="Suche">
+          <button type="submit" class="green_btn btn_middle">Go!</button>
+          <button type="submit" value="" class="green_btn red">Löschen</button>
+        </form>
+      </div>
+      <div>
+        {% for user in users %}
+        <div class="profile_card">
+          <div class="profile_img_card">
+            <img src="{% static user.pictureUrl %}" alt="Userprofile {{ name }}" class="profile_img">
+          </div>
+          <div class="profile_bio_card">
+            <p class="profile_name">{{ user.name }}</p>
+            <p class="profile_creation">Registriert seit {{ user.creation }}</p>
+            <p class="profile_bio">{{ user.bio }}</p>
+            {% if user.uid in following %}
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="unfollowUid" value="{{ user.uid }}"> 
+                <button type="submit" class="green_btn red">Entfolgen</button>
+              </form>
+            {% else %}
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="followUid" value="{{ user.uid }}"> 
+                <button type="submit" class="green_btn">Folgen</button>
+              </form>
+            {% endif %}
+          </div>
+          <div class="stats_card_items">
+            <div class="stat stat_red" onclick="showFollowing()">
+              <p class="stat_title">Following</p>
+              <p class="stat_number">{{ user.followingAmount }}</p>
+            </div>
+            <div class="stat stat_red stat_middle" onclick="showFollowers()">
+              <p class="stat_title">Follower</p>
+              <p class="stat_number">{{ user.followerAmount }}</p>
+            </div>
+            <div class="stat stat_green" onclick="showHabits()">
+              <p class="stat_title">Erfolge &#11088</p>
+              <p class="stat_number">{{ user.habitsAmount }}</p>
+            </div>
+          </div>
+          <div class="stat_show_card">
+            <p class="stat_show_title">Following</p>
+            {% if user.followingAmount == 0 %}
+              <p>Diesem Nutzer folgen bisher keine anderen Nutzer.</p>
+            {% endif %}
+            {% for username in user.following %}
+              <div class="stat_show_item">&#128279; {{ username }}</div>
+            {% endfor %}
+          </div>
+          <div class="stat_show_card">
+            <p class="stat_show_title">Followers</p>
+            {% if user.followerAmount == 0 %}
+              <p>Dieser Nutzer folgt bisher keinem anderen Nutzer.</p>
+            {% endif %}
+            {% for username in user.followers %}
+              <div class="stat_show_item">&#128279; {{ username }}</div>
+            {% endfor %}
+          </div>
+          <div class="stat_show_card">
+            <p class="stat_show_title">Erfolge &#11088;</p>
+            {% if user.habitsAmount == 0 %}
+              <p>Dieser Nutzer hat bisher noch keine abgeschlossenen Habits.</p>
+            {% endif %}
+            {% for item in user.habits %}
+              <div class="stat_show_item"><strong class="checkmark">&#x2714;</strong> {{ item }}</div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+        <!-- <div class="ScrollBereich" style="margin-top: 15%;">
+                {% for user in SearchContainer %}
+                    {% if user.username != "" %}
+                        {% if user.username != "Rhabit-User" %}
+            <div id="PostSearch" style="background-color: white;">
+                            {% if user.Profilbild != "0" %}
+                <img id="ProfilbildSearch" src="{{ user.Profilbild }}" alt="Profilbild">
+                            {% else %}
+                <img id="ProfilbildSearch" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo.png" alt="Profilbild">
+                            {% endif %}
+                <p id="NameSearch">{{ user.username }}</p>
+                <div style="display: flex; justify-content: space-evenly;">
+                    <div style="display: flex; justify-content: center; width: 50%;">
+                        <p onclick="showDetail ('{{ user.username }}')" id="Derzeitiges_ZielSearch" style="color: white; background-color: #fca311; box-shadow: 0 5px 5px 0px gray; cursor: pointer; width: 100%; border: none; margin: 3.5%;">show</p>
+                    </div>
+                        {% if user.uid in user.folgend %}
+                <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" style="display: flex; width: 50%; justify-content: center;">
+                    <input type="hidden" name="uid" value="{{ UID }}">
+                    <input type="hidden" name="pwd" value="{{ Passwort }}">
+                    <input type="hidden" name="unFollow" value="{{ user.filename }}">    
+                    <button type="submit" id="Derzeitiges_ZielSearch" style="color: white; background-color: lightgreen; box-shadow: inset 0 5px 5px 0px gray; cursor: pointer; width: 100%; border: none; margin: 3.5%;">gefolgt</button>
+                </form>        
+                        {% else %}
+                <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" style="display: flex; width: 50%; justify-content: center;">
+                    <input type="hidden" name="uid" value="{{ UID }}">
+                    <input type="hidden" name="pwd" value="{{ Passwort }}">
+                    <input type="hidden" name="wantToFollow" value="{{ user.filename }}">    
+                    <button type="submit" id="Derzeitiges_ZielSearch" style="color: white; background-color: lightcoral; box-shadow: 0 5px 5px 0px gray; cursor: pointer; width: 100%; border: none; margin: 3.5%;">follow</button>
+                </form>        
+                        {% endif %}
+                </div>
+            </div>
+            <div id="{{ user.username }}" style="display: none;">
+                <div id="searchUserDetails" style="display: grid; justify-content: center;">
+                    <div id="ContentHome" style="background-color: #e9ecef; border-radius: 20px; border: 3px solid lightgreen; min-height: fit-content; margin: 0 2%;">
+                        <p onclick="hideDetail('{{ user.username }}')" style="background-color: white; color: gray; font-size: 120%; float: right; border-radius: 20px; padding: 1% 5%; border: 3px solid #fca311; box-shadow: 0 10px 5px gray; margin-right: -6%; margin-top: -5%; cursor: pointer;">close</p>
+                        <div id="Personal_DataHome">
+                            <div id="UsernameHome" style=" box-shadow: 0px 10px 5px gray;">
+                                {% if user.Profilbild != "" %}
+                                <img src="{{ user.Profilbild }}" alt="" style="height: auto; width: 30%; border-radius: 30px; display: flex; margin: 2% 0;">
+                                {% else %}
+                                <img id="ProfilbildSearch" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo.png" alt="Profilbild">
+                                {% endif %}
+                                <p id="NameHome">{{ user.username }}</p> <br>
+                                <div id="BioHome">
+                                    <p style="font-size: 70%; color: gray;">{{ user.email }}    <strong>I</strong>    Registriert seit {{ user.erstellt }}</p>
+                                    {{ user.bio }}
+                                </div>
+                            </div>
+                            <div id="GoalHome" style=" box-shadow: 0px 10px 5px gray; margin-top: 5%; min-height: none;">
+                                <p id="Derzeitiges_ZielHome1" style="background: linear-gradient(lightcoral 50%, white 50%); width: 30%; line-height: 0.75; border-radius: 10px; color: white;">Following <br><br><strong style="color: black;">{{ user.gefolgtZahl }}</strong></p>
+                                <p id="Derzeitiges_ZielHome2" style="background: linear-gradient(lightcoral 50%, white 50%); width: 30%; line-height: 0.75; border-radius: 10px; color: white;">Follower <br><br><strong style="color: black;">{{ user.folgendZahl }}</strong></p>
+                                <p id="Derzeitiges_ZielHome3" style="background-color: #a2e3c4; width: 30%; line-height: 0.75; border-radius: 10px;">Erfolge &#11088; <br><br><strong>{{ user.habitZahl }}</strong></p>
+                            </div>
+                            
+                            <div id="ProgressHome1" style="display: block; background-color: white; box-shadow: 0px 2px 25px silver; overflow: auto; height: 150px;">
+                                <p id="Label_Progress" style="font-weight: bold;">Following:</p>
+                                {% for each in user.gefolgt %}
+                                    <p id="followingLi">&#128279; {{ each }}<p>
+                                {% endfor %}
+                            </div>
+            
+                            <div id="ProgressHome2" style="display: block; background-color: white; box-shadow: 0px 2px 25px silver; overflow: auto; height: 150px;">
+                                <p id="Label_Progress" style="font-weight: bold;">Follower:</p>
+                                {% for each in user.folgend %}
+                                    <p id="followingLi">&#128279; {{ each }}<p>
+                                {% endfor %}
+                            </div>
+            
+                            <div id="ProgressHome3" style="display: block; background-color: #a2e3c4; box-shadow: 0px 2px 25px silver; overflow: auto; height: 150px;">
+                                <p id="Label_Progress" style="font-weight: bold;">Erfolge &#11088;</p>
+                                {% for each in user.habits %}
+                                    <p id="followingLi">{{ each }} <strong style="color: lightgreen;">&#x2714;</strong><p>
+                                {% endfor %}
+                            </div>    
+                                  
+                        </div>
+                        <div class="ScrollBereich">
+                            {% if user.currentHabit != "" %}
+                            <div id="PostHome" style="background-color: {{ user.backgrC }}; box-shadow: 0px 10px 5px gray;">
+                                <div id="UsernameHome" style="background-color: {{ user.rowC }};">
+                                    <p id="NameHome" style="font-size: 80%;">{{ user.currentHabit }}</p> <br>
+                                </div>
+                                <div id="GoalHome" style="background-color: {{ user.rowC }};">
+                                    <p id="Label_Goal">Zeit bis zum Ziel: </p><p id="Derzeitiges_ZielHome" style="color: white; background-color: {{ user.blockC }};">{{ user.currentdays }} Tage</p>
+                                </div>
+                                <div id="ProgressHome" style="background-color: {{ user.rowC }};">
+                                    <p id="Label_Progress">Fortschritt:</p> <p id="Karotten" style="color: white; background-color: {{ user.blockC }};"><strong id="count">{{ user.currentCdays }}</strong> / {{ user.currentdays }} &#129365;</p>
+                                    <div id="TextPosts">
+                                        {% for item in user.currentDayPosts %}
+                                        <p id="Aktueller_Stand">&#129365; : {{ item }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% if user.finalPost != "" %}
+                                    <div id="TextPosts" style="display: grid; justify-content: center;">
+                                        <img src="{{ user.finalPost }}" alt="Abschlussfoto" style="width: 100%; border-radius: 10px;">
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% else %}
+                            <button id="PostHome" style="background-color: #d3d3d3; color: white; font-weight: bold; font-size: 140%; width: 100%; border: none; box-shadow: 0px 10px 5px gray; cursor: pointer;">
+                                Keine aktuellen Gewohnheiten 
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div> -->
+    </div>
+    <footer>
+      <div class="NavigationContainer">
+        <a id="circle1" href="/profile/"><img id="Haussymbol" style="height: 25px;" src="{% static 'imgs/Home_Symbol.png' %}" alt=""></a>
+        <a id="circle2" href="/"><img id="Hasensymbol" style="height: 25px;" src="{% static 'imgs/Main_Symbol.png' %}" alt=""></a>
+        <a id="circle3" style="height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;" href="/search/"><img id="Suchensymbol" style="height: 55px;" src="{% static 'imgs/Search_Symbol.png' %}" alt=""></a>
+      </div>   
+    </footer>
+  </div>
+</body>
+</html>

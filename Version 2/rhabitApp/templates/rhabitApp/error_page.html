@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hoppla!</title>
+  <link rel="icon" href="{% static 'imgs/RH-Title.png' %}">
+  <link rel="stylesheet" href="{% static 'styles/error.css' %}">
+</head>
+<body>
+  <div class="centered">
+    <h3 class="gray_text">Hoppel, hoppel ...</h3>
+    <h1 class="green_text">Hoppla !</h1>
+    <img src="{% static 'imgs/Träne.png' %}" alt="Rhabit. Hoppla" class="img">
+    {% if error == 'login' %}
+      <p class="gray_text">Das <strong>Passwort</strong> oder der <strong>Benutzer</strong> sind falsch!</p>
+      <p class="gray_text">Versuchs's nochmal &#128521;</p>
+      <a href="/login/"><button class="again_button">try again</button></a>
+    {% elif error == 'signup' %}
+      <p class="gray_text">Der <strong>Nutzername</strong> oder die <strong>E-Mail</strong> sind leider schon vergeben!</p>
+      <p class="gray_text">Versuchs's nochmal &#128521;</p>
+      <a href="/signup/"><button class="again_button">try again</button></a>
+    {% endif %}
+  </div>
+</body>
+</html>

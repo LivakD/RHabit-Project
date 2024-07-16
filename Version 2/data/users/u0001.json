@@ -1,0 +1,66 @@
+{
+  "name": "Louis@123",
+  "email": "louis123@mail.com",
+  "pwd": "schweresPasswort123",
+  "creation": "2024-05-31",
+  "bio": "Kreativer Text von Louis...",
+  "picture": false,
+  "followers": [
+    "u0002",
+    "u0003"
+  ],
+  "following": [
+    "u0000",
+    "u0002",
+    "u0003"
+  ],
+  "currentHabits": [
+    {
+      "name": "Louis Test Habit",
+      "startDate": "2024-06-14",
+      "endDate": "2024-06-20",
+      "milestones": [
+        {
+          "content": "Erster Tag",
+          "completedDate": "2024-06-15"
+        },
+        {
+          "content": "Zweiter Tag",
+          "completedDate": "2024-06-16"
+        },
+        {
+          "content": "Dritter Tag",
+          "completedDate": "2024-06-17"
+        },
+        {
+          "content": "Vierter Tag",
+          "completedDate": "2024-06-18"
+        }
+      ]
+    },
+    {
+      "name": "Louis Test Habit",
+      "startDate": "2024-06-14",
+      "endDate": "2024-06-20",
+      "milestones": [
+        {
+          "content": "Erster Tag",
+          "completedDate": "2024-06-15"
+        },
+        {
+          "content": "Zweiter Tag",
+          "completedDate": "2024-06-16"
+        },
+        {
+          "content": "Dritter Tag",
+          "completedDate": "2024-06-17"
+        },
+        {
+          "content": "Vierter Tag",
+          "completedDate": "2024-06-18"
+        }
+      ]
+    }
+  ],
+  "habits": []
+}

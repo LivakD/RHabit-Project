@@ -1,0 +1,52 @@
+:root {
+  --gray: #808080;
+  --light-green: #bcd2ad;
+  --green: #018001;
+  --light-green-hover: #96b87e;
+  --white: #fff;
+}
+
+body {
+  font-family: Calibri, sans-serif;
+  display: grid;
+}
+
+.centered {
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.green_text {
+  color: var(--light-green);
+}
+
+.gray_text {
+  color: var(--gray);
+}
+
+.img {
+  border-radius: 500px;
+  height: 200px;
+}
+
+.again_button {
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  margin: 15px auto 5px auto;
+  width: 200px;
+  background-color: var(--light-green);
+  border: none;
+  border-bottom: 3px solid var(--green);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.3s;
+}
+
+.again_button:hover {
+  background-color: var(--light-green-hover);
+}

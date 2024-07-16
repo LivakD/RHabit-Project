@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RHabit.</title>
+  <link rel="icon" href="{% static 'imgs/RH-Title.png' %}">
+  <link rel="stylesheet" href="{% static 'styles/user.css' %}">
+  <title>User</title>
+  <script>
+    function showFollowers() {
+      const followers = document.getElementById('stat_show_followers');
+      const following = document.getElementById('stat_show_following');
+      const habits = document.getElementById('stat_show_habits');
+      if (Array.from(followers.classList).includes('hidden')) {
+        followers.classList.remove('hidden');
+        following.classList.add('hidden');
+        habits.classList.add('hidden');
+      } else {
+        followers.classList.add('hidden');
+      }
+    }
+
+    function showFollowing() {
+      const followers = document.getElementById('stat_show_followers');
+      const following = document.getElementById('stat_show_following');
+      const habits = document.getElementById('stat_show_habits');
+      if (Array.from(following.classList).includes('hidden')) {
+        followers.classList.add('hidden');
+        following.classList.remove('hidden');
+        habits.classList.add('hidden');
+      } else {
+        following.classList.add('hidden');
+      }
+    }
+
+    function showHabits() {
+      const followers = document.getElementById('stat_show_followers');
+      const following = document.getElementById('stat_show_following');
+      const habits = document.getElementById('stat_show_habits');
+      if (Array.from(habits.classList).includes('hidden')) {
+        followers.classList.add('hidden');
+        following.classList.add('hidden');
+        habits.classList.remove('hidden');
+      } else {
+        habits.classList.add('hidden');
+      }
+    }
+
+    function hide(event, element) {
+      if (event.target != element) {
+        event.stopPropagation();
+        return;
+      }
+      const dialogs = document.getElementsByClassName('dialog_bg');
+      for (i = 0; i < dialogs.length; i++) {
+        dialogs[i].classList.add('hidden');
+      }
+    }
+
+    function show(item) {
+      const item_element = document.getElementById(item);
+      item_element.classList.remove('hidden');
+    }
+
+    function showOptions() {
+      const options_dropdown = document.getElementById('options_dropdown');
+      if (Array.from(options_dropdown.classList).includes('active')) {
+        options_dropdown.classList.remove('active');
+      } else {
+        options_dropdown.classList.add('active');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="outer">
+    <div class="header">
+      <img class="head_img" src="{% static 'imgs/Logo_Schriftzug.png' %}" alt="Rhabit. Logo">
+      <button class="options_btn" onclick="showOptions()">&#8285;</button>
+      <div class="options_dropdown_outer">
+        <ul id="options_dropdown" class="options_dropdown">
+          <li class="options_dropdown_item"><a onclick="show('change_username_card')" class="options_dropdown_item_inner">Username ändern</a></li>
+          <li class="options_dropdown_item"><a onclick="show('change_password_card')" class="options_dropdown_item_inner">Passwort ändern</a></li>
+          <li class="options_dropdown_item"><a onclick="show('change_picture_card')" class="options_dropdown_item_inner">Profilbild ändern</a></li>
+          <li class="options_dropdown_item"><a onclick="show('delete_picture_card')" class="options_dropdown_item_inner">Profilbild löschen</a></li>
+          <li class="options_dropdown_item"><a onclick="show('edit_bio_card')" class="options_dropdown_item_inner">Biographie bearbeiten</a></li>
+          <li class="options_dropdown_item"><a onclick="show('change_email_card')" class="options_dropdown_item_inner">Email-Adresse ändern</a></li>
+          <li class="options_dropdown_item"><a href="/aboutus/" class="options_dropdown_item_inner">About us</a></li>
+          <li class="options_dropdown_item"><a onclick="show('logout_card')" class="options_dropdown_item_inner">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Logout X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="logout_card">
+      <div class="dialog_card">
+        <p class="dialog_title">Wirklich ausloggen?</p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="logout">
+          <button type="submit" class="green_btn red">Ja</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Username ändern X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="change_username_card">
+      <div class="dialog_card">
+        <p class="dialog_title">Username ändern</p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="changeUsername">
+          <input type="text" name="uname" placeholder="Username" class="green_input" required>
+          <button type="submit" class="green_btn">Speichern</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Passwort ändern X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="change_password_card">
+      <div class="dialog_card">
+        <p class="dialog_title">Passwort ändern</p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="changePassword">
+          <input type="password" name="pwd" placeholder="Passwort" class="green_input" required>
+          <button type="submit" class="green_btn">Speichern</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Profilbild ändern X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="change_picture_card">
+      <div class="dialog_card">
+        <p class="dialog_title">Profilbild ändern</p>
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="changePicture">
+          <input type="file" name="picture" required>
+          <button type="submit" class="green_btn">Speichern</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Profilbild löschen X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="delete_picture_card">
+        <div class="dialog_card">
+          <p class="dialog_title">Profilbild löschen</p>
+          <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="deletePicture">
+          <button type="submit" class="green_btn red">Löschen</button>
+          </form>
+        </div>
+    </div>
+
+    <!-- Bio ändern X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="edit_bio_card">
+        <div class="dialog_card">
+          <p class="dialog_title">Biographie bearbeiten</p>
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="editBio">
+            <input type="text" name="bio" placeholder="Neue Biographie" class="green_input" required>
+            <button type="submit" class="green_btn">Speichern</button>
+          </form>
+        </div>
+    </div>
+
+    <!-- E-Mail Adresse ändern X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="change_email_card">
+        <div class="dialog_card">
+            <p class="dialog_title">E-Mail Adresse ändern</p>
+            <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="changeEmail">
+            <input type="email" name="email" placeholder="E-Mail" class="green_input" required>
+            <button type="submit" class="green_btn">Speichern</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Habit hinzufügen X -->
+    <div class="dialog_bg hidden" onclick="hide(event, this)" id="add_habit_card">
+        <div class="dialog_card">
+            <p class="dialog_title">Habit hinzufügen</p>
+            <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="addHabit">
+            <input type="text" name="habitName" placeholder="Name" class="green_input" required>
+            <input type="date" name="habitStart" placeholder="Startdatum" class="green_input" required>
+            <input type="date" name="habitEnd" placeholder="Enddatum" class="green_input" required>
+            <button type="submit" class="green_btn">Speichern</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="background">
+      <div class="profile_card">
+        <div class="profile_img_card">
+          <img src="{% static pictureUrl %}" alt="Userprofile {{ name }}" class="profile_img">
+        </div>
+        <div class="profile_bio_card">
+          <p class="profile_name">{{ name }}</p>
+          <p class="profile_creation">Registriert seit {{ creation }}</p>
+          <p class="profile_bio">{{ bio }}</p>
+        </div>
+      </div>
+      <div class="stats_card">
+        <div class="stats_card_items">
+          <div class="stat stat_red" onclick="showFollowing()">
+            <p class="stat_title">Following</p>
+            <p class="stat_number">{{ followingAmount }}</p>
+          </div>
+          <div class="stat stat_red stat_middle" onclick="showFollowers()">
+            <p class="stat_title">Follower</p>
+            <p class="stat_number">{{ followerAmount }}</p>
+          </div>
+          <div class="stat stat_green" onclick="showHabits()">
+            <p class="stat_title">Erfolge &#11088</p>
+            <p class="stat_number">{{ habitsAmount }}</p>
+          </div>
+        </div>
+        <div class="stat_show_card hidden" id="stat_show_following">
+          <p class="stat_show_title">Following</p>
+          {% if followingAmount == 0 %}
+            <p>Diesem Nutzer folgen bisher keine anderen Nutzer.</p>
+          {% endif %}
+          {% for user in following %}
+            <div class="stat_show_item">&#128279; {{ user }}</div>
+          {% endfor %}
+        </div>
+        <div class="stat_show_card hidden" id="stat_show_followers">
+          <p class="stat_show_title">Followers</p>
+          {% if followerAmount == 0 %}
+            <p>Dieser Nutzer folgt bisher keinem anderen Nutzer.</p>
+          {% endif %}
+          {% for user in followers %}
+            <div class="stat_show_item">&#128279; {{ user }}</div>
+          {% endfor %}
+        </div>
+        <div class="stat_show_card hidden" id="stat_show_habits">
+          <p class="stat_show_title">Erfolge &#11088;</p>
+          {% if habitsAmount == 0 %}
+            <p>Dieser Nutzer hat bisher noch keine abgeschlossenen Habits.</p>
+          {% endif %}
+          {% for item in habits %}
+            <div class="stat_show_item"><strong class="checkmark">&#x2714;</strong> {{ item }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        {% for habit in currentHabits %}
+          {% with habitIndex=forloop.counter0 %} 
+            <div class="habit_card">
+              <div class="habit_item habit_name">
+                <div>
+                  {{ habit.name }}
+                </div>
+                <div>
+                  <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="deleteHabit">
+                    <input type="hidden" name="habitIndex" value="{{ habitIndex }}">
+                    <button type="submit" class="item_btn"><img class="item_icon" src="{% static 'imgs/Trash_Symbol.png' %}" alt="Löschen"></button>
+                  </form>
+                </div>
+              </div>
+              <div class="habit_item">
+                <div class="habit_progress_container">
+                  <div class="habit_progress" style="width: {{ habit.percentage }}%;">
+                  </div>
+                </div>
+                <div class="habit_dates">
+                  <div>Startdatum: <strong>{{ habit.startDate }}</strong></div>
+                  <div><strong>{{ habit.percentage }}%</strong></div>
+                  <div>Enddatum: <strong>{{ habit.endDate }}</strong></div>
+                </div>
+              </div>
+              <div class="habit_item">
+                {% for milestone in habit.milestones %}
+                  <div class="habit_milestone">
+                    <div>
+                      &#129365 {{ milestone.content }}
+                    </div>
+                    <div>
+                      <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="editMilestone">
+                        <input type="hidden" name="milestoneIndex" value="{{ forloop.counter0 }}">
+                        <input type="hidden" name="habitIndex" value="{{ habitIndex }}">
+                        <input type="text" name="milestoneName" placeholder="Meilenstein ändern" class="green_input" required>
+                        <button type="submit" class="item_btn"><img class="item_icon" src="{% static 'imgs/Edit_Symbol.png' %}" alt="Bearbeiten"></button>
+                      </form>
+                      <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="deleteMilestone">
+                        <input type="hidden" name="milestoneIndex" value="{{ forloop.counter0 }}">
+                        <input type="hidden" name="habitIndex" value="{{ habitIndex }}">
+                        <button type="submit" class="item_btn"><img class="item_icon" src="{% static 'imgs/Trash_Symbol.png' %}" alt="Löschen"></button>
+                      </form>
+                    </div>
+                  </div>
+                {% endfor %}
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="addMilestone">
+                  <input type="hidden" name="milestoneIndex" value="{{ forloop.counter0 }}">
+                  <input type="hidden" name="habitIndex" value="{{ habitIndex }}">
+                  <input type="text" name="milestoneName" placeholder="Meilenstein hinzufügen" class="green_input" required>
+                  <button type="submit" class="item_btn"><img class="item_icon" src="{% static 'imgs/Edit_Symbol.png' %}" alt="Bearbeiten"></button>
+                </form>
+              </div>
+            </div>
+          {% endwith %}
+        {% endfor %}
+      </div>
+      <button onclick="show('add_habit_card')" class="green_btn">
+        + Neue Gewohnheit anlegen
+      </button>
+    </div>
+    <footer>
+      <div class="NavigationContainer">
+        <a id="circle1" style="height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;" href="/profile/"><img id="Haussymbol" style="height: 55px;" src="{% static 'imgs/Home_Symbol.png' %}" alt=""></a>
+        <a id="circle2" href="/"><img id="Hasensymbol" style="height: 25px;" src="{% static 'imgs/Main_Symbol.png' %}" alt=""></a>
+        <a id="circle3" href="/search/"><img id="Suchensymbol" style="height: 25px;" src="{% static 'imgs/Search_Symbol.png' %}" alt=""></a>
+      </div>    
+  </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+  <title>Home</title>
+</head>
+<body>
+  <div class="outer">
+    <div class="header">
+      <img style="height: 50px;" src="{% static 'imgs/Logo_Schriftzug.png' %}" alt="Rhabit. Logo">
+    </div>
+    <div class="background">
+      {% for user in users %}
+        <div class="profile_card">
+          <div class="profile_img_card">
+            <img src="{% static user.pictureUrl %}" alt="Userprofile {{ name }}" class="profile_img">
+          </div>
+          <div class="profile_bio_card">
+            <p class="profile_name">{{ user.name }}</p>
+          </div>
+        {% for habit in user.currentHabits %}
+          {% with habitIndex=forloop.counter0 %} 
+
+              <div class="habit_item habit_name">
+                <div>
+                  {{ habit.name }}
+                </div>
+              </div>
+              <div class="habit_item">
+                <div class="habit_progress_container">
+                  <div class="habit_progress" style="width: {{ habit.percentage }}%;">
+                  </div>
+                </div>
+                <div class="habit_dates">
+                  <div>Startdatum: <strong>{{ habit.startDate }}</strong></div>
+                  <div><strong>{{ habit.percentage }}%</strong></div>
+                  <div>Enddatum: <strong>{{ habit.endDate }}</strong></div>
+                </div>
+              </div>
+              <div class="habit_item">
+                {% for milestone in habit.milestones %}
+                  <div class="habit_milestone">
+                    <div>
+                      &#129365 {{ milestone.content }}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+          {% endwith %}
+        {% endfor %}
+            </div>
+      {% endfor %}
+    </div>
+    <footer>
+      <div class="NavigationContainer">
+        <a id="circle1" href="/profile/"><img id="Haussymbol" style="height: 25px;" src="{% static 'imgs/Home_Symbol.png' %}" alt=""></a>
+        <a id="circle2" style="height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;" href="/"><img id="Hasensymbol" style="height: 55px;" src="{% static 'imgs/Main_Symbol.png' %}" alt=""></a>
+        <a id="circle3" href="/search/"><img id="Suchensymbol" style="height: 25px;" src="{% static 'imgs/Search_Symbol.png' %}" alt=""></a>
+      </div>    
+    </footer>
+  </div>
+  <!-- <div id="Mainpage">
+    <div id="ContentMain">
+        <div class="ScrollBereichMain">
+            {% for card in FollowingCards %}
+            {% if card.habitName != "" %}
+            <div id="PostMain" style="background-color: {{ card.postBackC }}; box-shadow: 0px 10px 5px gray;">
+                <div id="UsernameMain" style="background-color: {{ card.postRowC }};">
+                    <p id="NameMain">{{ card.name }}</p> <br>
+                    / Bei "Hase_Fortschritt" wird der Fortschrittstatus über die Margin-Werte bestimmt. Margin-Left ist der Fortschritt des Hasen-Bildes, margin-right ist der Wert, den die Karotte als Abstand vom Hasen hat. Beide zusammen müssen 80% ergeben, da es sich sonst in der mobilen Ansicht in eine neue Zeile verschiebt 
+                    <img id="Hase_FortschrittMain" style="margin-left: 20%; margin-right: 60%;" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Hase_Rechts.png" alt=""> 
+                    <p id="Emoji_KarotteMain">&#129365;</p> /
+                </div>
+                <div id="GoalMain" style="background-color: {{ card.postRowC }};">
+                    <p id="Label_GoalMain">Derzeitiges Ziel:</p><p id="Derzeitiges_ZielMain" style="font-weight: bold; margin-left:2%; background-color: {{ card.postBlockC }};"> {{ card.habitName }}</p>
+                </div>
+                <div id="ProgressMain" style="background-color: {{ card.postRowC }};">
+                    <p id="Label_ProgressMain">Fortschritt:</p> <p id="Karotten" style="background-color: {{ card.postBlockC }};">{{ card.currentDays }} / {{ card.days }} &#129365;</p>
+                    <div id="TextPostsMain" style="display: grid; justify-content: center;">
+                        {% for Post in card.dayPosts %}
+                        <p id="Aktueller_StandMain">&#129365; : {{ Post }} </p>
+                        / <p>Gepostet am {{ card.postDay }} um {{ card.postTime }}</p> /
+                        {% endfor %}
+                        {% if card.Foto != "" %}
+                        <img src="{{ card.Foto }}" alt="Abschlussfoto" style="width: 100%; border-radius: 10px;">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div id="PostMain">
+                <div id="UsernameMain">
+                    <p id="NameMain">{{ card.name }}</p> <br>
+                    / Bei "Hase_Fortschritt" wird der Fortschrittstatus über die Margin-Werte bestimmt. Margin-Left ist der Fortschritt des Hasen-Bildes, margin-right ist der Wert, den die Karotte als Abstand vom Hasen hat. Beide zusammen müssen 80% ergeben, da es sich sonst in der mobilen Ansicht in eine neue Zeile verschiebt /
+                </div>
+                <div id="GoalMain">
+                    <p id="Label_GoalMain">Faulenzen &#128564;</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div> -->
+</body>
+</html>

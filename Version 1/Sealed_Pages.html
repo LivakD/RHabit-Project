@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RHabit. - Build your Habit.</title>
+    <link rel="icon" type="image/png" href="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/RH-Title.png">
+</head>
+<style>
+    /* ------------------------------------------ Allgemein ------------------------------------------ */
+    body {
+        font-family: Calibri, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        background-image: url(http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo_Background_Repeat.png);
+        background-size: 50%;
+        background-attachment: fixed;
+        
+        
+    }
+    header {
+        background-color: #a4c3b2;
+        height: 50px;
+        position: sticky;
+        top: 0px;
+        box-shadow: 0px 2px 25px silver;
+        z-index: 5;
+    }
+
+    .HeadLogo {
+        height: 50px;
+        width: auto;
+
+    }
+
+    #LogIn {
+        color: white;
+        float: right;
+        font-size: 200%;
+        margin: 0.25% 0;
+        text-align: right;
+        padding-right: 3%;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .dropdown {
+        float: right;
+    }
+
+    ul {
+        transform-origin: top;
+        transform: perspective(1000px) rotateX(-90deg);
+        transition: 0.5s;
+        margin-top: 23%;
+        margin-bottom: -50%;
+        
+    }
+
+    ul.active {
+        transform: perspective(1000px) rotateX(0deg);
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    ul li a {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        background: #a4c3b2;
+        text-decoration: none;
+        color: #fff;
+        border-bottom: 1px solid rgba(0,0,0,.2);
+        cursor: pointer;
+    }
+
+    ul li a:hover {
+        background: lightseagreen;
+        transition: 0.5s;
+    }
+
+    footer {
+        background-color: lightgray;
+        height: 50px;
+        position: sticky;
+        bottom: 0;
+        box-shadow: 0px 15px 25px silver;
+    }
+    .NavigationContainer {
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    #circle1, #circle2, #circle3 {
+        border: 4px solid darkgray;
+        border-radius: 25px;
+        height: 40px;
+        width: 40px;
+        float: left;
+        margin: 0 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    /* ------------------------------------------ HomePage ------------------------------------------ */
+
+    #ContentHome {
+        background-color: #e9ecef99;
+        padding: 1% 3%;
+        box-shadow: 0px 15px 25px silver;
+        min-height: 1500px;
+    }
+
+    #changeName, #changePwd, #changePic, #changeBio, #changeMail, #deletePic, #setHabit, #addGate, #postGoal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-origin: center;
+        z-index: 100;
+        position: fixed;
+        width: 36.875%;
+        background-color: #fbfbfb99;
+        padding: 5%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #formName {
+        display: grid;
+        align-items: center;
+        width: 200%;
+        margin-left: -50%;
+    }
+    
+    #changeEingabe {
+        font-size: 150%;
+        width: 93%;
+        border-radius: 10px;
+        padding: 3%;
+        margin-bottom: 15%;
+    }
+
+    #formNameButtons {
+        width: 100%;
+        float: left;
+        margin: 5% auto;
+        font-size: 150%;
+        background-color: #a4c3b2;
+        border: none;
+        padding: 3%;
+        border-radius: 20px;
+        color: white;
+        border-bottom: 3px solid darkgreen;
+    }
+
+    .hidden {
+        display: none;
+    }
+    
+    #PostHome {
+        background-color: #eaf4f4;
+        margin: 4% 0;
+        padding: 2% 3%;
+        border-radius: 20px;
+        box-shadow: 0px 15px 25px silver;
+    }
+
+    #UsernameHome {
+        font-size: 150%;
+        font-weight: bold;
+        background-color: #cce3de;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+    }
+
+    #BioHome {
+        font-size: 80%;
+        font-weight: normal;
+        margin: 1% 0;
+    }
+
+    #StatsHome {
+        float: right;
+        margin-top: -20%;
+        font-weight: normal;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #StatsHome div {
+        margin: 0 3%;
+        width: 20%;
+        height: 20%;
+    }
+
+    #followingLi {
+        background-color: whitesmoke;
+        color: black;
+        padding: 2%;
+        border-radius: 15px;
+    }
+
+    #Hase_Fortschritt {
+        
+        height: 30px;
+    }
+
+    #NameHome {
+        float: left;
+        display: contents;
+    }
+
+    #Emoji_Karotte {
+        float: right;
+        display: contents;
+    }
+
+    #GoalHome {
+        background-color: #cce3de;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+        justify-content: center;
+        align-content: center;
+        display: flex;
+    }
+
+    #Derzeitiges_ZielHome, #Derzeitiges_ZielHome1, #Derzeitiges_ZielHome2, #Derzeitiges_ZielHome3 {
+        margin-left: 5%;
+        background-color: #a4c3b2;
+        padding: 1% 3%;
+        margin: -1% 0 -1% 3%;
+        border-radius: 15px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    #Derzeitiges_ZielHome {
+        padding-top: 3%;
+    }
+
+    #ProgressHome, #ProgressHome1, #ProgressHome2, #ProgressHome3 {
+        background-color: #cce3de;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+        overflow: auto;
+        max-height: 250px;
+    }
+
+    #Karotten {
+        margin-left: 5%;
+        background-color: #a4c3b2;
+        padding: 3%;
+        margin: -1% 0;
+        border-radius: 15px;
+        width: 15%;
+    }
+
+    #Add_Progress {
+        margin-left: 5%;
+        background-color: #e9ecef;
+        padding: 1%;
+        margin: -1% 0;
+        border-radius: 15px;
+        border-bottom: 3px solid gray;
+        width: 15%;
+    }
+
+    #habitSelection2, #habitSelection3, #habitSelection4, #habitSelection5, #categ {
+        margin: 6% 0;
+        background-color: white;
+        padding: 5%;
+        border-radius: 25px;
+        text-align: center;
+        line-height: 2.5em;
+    }
+    #habitSelection2 {
+        background-color: #ffd7ba;
+    }
+    #habitSelection3 {
+        background-color: #E2F0D9;
+    }
+    #habitSelection4 {
+        background-color: #FFF2CC;
+    }
+    #habitSelection5 {
+        background-color: #DEEBF7;
+    }
+
+    #formName select {
+        font-size: 100%;
+        width: 80%;
+        border-radius: 20px;
+    }
+
+
+        /* ------------------------------------------ MainPage ------------------------------------------ */
+
+        #ContentMain {
+        background-color: #e2f0d994;
+        padding: 1% 3%;
+        box-shadow: 0px 15px 25px silver;
+        min-height: 1500px;
+    }
+
+    #PostMain {
+        background-color: #eaf4f4;
+        margin: 4% 2%;
+        padding: 2% 3%;
+        border-radius: 20px;
+        box-shadow: 0px 15px 25px silver;
+    }
+
+    #UsernameMain {
+        font-size: 150%;
+        font-weight: bold;
+        background-color: #cce3de;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+    }
+
+    #Hase_FortschrittMain {
+        
+        height: 30px;
+    }
+
+    #NameMain {
+        float: left;
+        display: contents;
+    }
+
+    #Emoji_KarotteMain {
+        float: right;
+        display: contents;
+    }
+
+    #GoalMain {
+        background-color: #cce3de;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+        justify-content: left;
+        align-content: center;
+        display: flex;
+    }
+
+    #Derzeitiges_ZielMain {
+        margin-left: 5%;
+        background-color: #a4c3b2;
+        padding: 3%;
+        margin: -1% 0 -1% 3%;
+        border-radius: 15px;
+    }
+
+    #ProgressMain {
+        background-color: #cce3de;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+        overflow: auto;
+        max-height: 250px;
+       
+    }
+
+    #KarottenMain {
+        margin-left: 5%;
+        background-color: #a4c3b2;
+        padding: 3%;
+        margin: -1% 0;
+        border-radius: 15px;
+        width: 15%;
+    }
+
+        /* ------------------------------------------ MainPage ------------------------------------------ */
+
+    #ContentSearch {
+        background-color: #e7daff99;
+        padding: 1% 3%;
+        box-shadow: 0px 15px 25px silver;
+        min-height: 1500px;
+    }
+
+    #PostSearch {
+        background-color: #eaf4f4;
+        margin: 4% 2%;
+        padding: 2% 3%;
+        border-radius: 20px;
+        box-shadow: 0px 15px 25px silver;
+        display: grid;
+    }
+
+    #UsernameSearch {
+        font-size: 150%;
+        font-weight: bold;
+        background-color: #d3d3d3;
+        padding: 1% 4%;
+        border-radius: 15px;
+        margin-bottom: 1%;
+        text-align: center;
+        width: 50%;
+    }
+
+    #NameSearch {
+        float: left;
+        display: grid;
+        font-weight: bold;
+    }
+
+    #sort {
+        background-color: #d3d3d3;
+        padding: 1% 4%;
+        border-radius: 15px;
+        width: 40%;
+        text-align: center;
+        font-size: 150%;
+        font-weight: bold;
+    }
+
+   /* #Derzeitiges_ZielSearch {
+        margin-left: 5%;
+        background-color: #a4c3b2;
+        padding: 1%;
+        margin: -1% 0 -1% 3%;
+        border-radius: 20px;
+        float: right;
+    }*/
+
+    #Personal_DataSearch {
+        align-content: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #ProfilbildSearch {
+        height: 50px;
+        width: 50px;
+        border-radius: 30px;
+        display: grid;
+    }
+
+    #Searchform {
+        display: flex;
+        justify-content: space-evenly;
+        position: fixed;
+        width: 90%;
+        padding: 1% 5%;
+        max-width: 943px;
+        z-index: 4;
+
+    }
+
+    #Derzeitiges_ZielSearch {
+        padding: 3% 5%;
+        text-align: center;
+        margin: -1.25%;
+        width: 37%;
+        max-width: 200px;
+        border-radius: 20px;
+
+    }
+
+        /* ------------------------------------------ Media Screen ------------------------------------------ */
+
+    @media only screen and (max-width: 500px) {
+        #Add_Progress {
+            width: 40%;
+        }
+
+        #LogIn {
+            margin: 1% 0;
+
+        }
+
+        #Derzeitiges_ZielHome {
+        padding-top: 5.5%;
+    }
+
+        #StatsHome p {
+            font-size: 40%;
+        }
+
+        #changeName, #changePwd, #changePic, #changeBio, #changeMail, #deletePic, #setHabit, #addGate, #postGoal {
+            padding: 32%;
+        }
+
+        #formName {
+            width: 160%;
+            margin-left: -27.25%;
+        }
+
+        /*#Searchform {
+        margin-top: -60%;
+        position: fixed;
+        padding: 5%;
+        }*/
+
+        #Derzeitiges_ZielSearch {
+        margin: 2%;
+        }
+
+    }
+</style>
+
+<script>
+
+/* function meilensteinAdden () {
+    var pErstellen = document.createElement("p");
+    Eingabe = prompt("Schreibe etwas zu deinem Meilenstein: ")
+
+    var value = document.getElementById("count").innerHTML;
+    value++;
+    document.getElementById("count").innerHTML = value;
+
+    pErstellen.innerHTML = value + " &#129365; : " + Eingabe;
+    pErstellen.setAttribute("id", "Aktueller_Stand");
+    document.getElementById("TextPosts").appendChild(pErstellen);
+
+}
+*/
+
+function HomePage () {
+    var hideSearch = document.getElementById("Searchpage").setAttribute("style", "display: none;");
+    document.getElementById("circle3").setAttribute("style", "none");
+    document.getElementById("Suchensymbol").setAttribute("style", "height: 25px");
+
+    var hideMain = document.getElementById("Mainpage").setAttribute("style", "display: none;");
+    document.getElementById("circle2").setAttribute("style", "none");
+    document.getElementById("Hasensymbol").setAttribute("style", "height: 25px");
+
+    var showHome = document.getElementById("Homepage").setAttribute("style", "display: block;");
+    document.getElementById("circle1").setAttribute("style", "height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;");
+    document.getElementById("Haussymbol").setAttribute("style", "height: 55px");
+}
+
+function MainPage () {
+    var hideSearch = document.getElementById("Searchpage").setAttribute("style", "display: none;");
+    document.getElementById("circle3").setAttribute("style", "none");
+    document.getElementById("Suchensymbol").setAttribute("style", "height: 25px");
+
+    var hideHome = document.getElementById("Homepage").setAttribute("style", "display: none;");
+    document.getElementById("circle1").setAttribute("style", "none");
+    document.getElementById("Haussymbol").setAttribute("style", "height: 25px");
+
+    var showMain = document.getElementById("Mainpage").setAttribute("style", "display: block;");
+    document.getElementById("circle2").setAttribute("style", "height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;");
+    document.getElementById("Hasensymbol").setAttribute("style", "height: 55px");
+
+}
+
+function SearchPage () {
+    var hideHome = document.getElementById("Homepage").setAttribute("style", "display: none;");
+       document.getElementById("circle1").setAttribute("style", "none");
+       document.getElementById("Haussymbol").setAttribute("style", "height: 25px");
+
+    var hideMain = document.getElementById("Mainpage").setAttribute("style", "display: none;");
+        document.getElementById("circle2").setAttribute("style", "none");
+        document.getElementById("Hasensymbol").setAttribute("style", "height: 25px");
+
+    var showSearch = document.getElementById("Searchpage").setAttribute("style", "display: block;");
+    document.getElementById("circle3").setAttribute("style", "height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;");
+    document.getElementById("Suchensymbol").setAttribute("style", "height: 55px");
+
+}
+
+function showFollowing () {
+    document.getElementById("ProgressHome2").setAttribute("style", "display: none;");
+    document.getElementById("ProgressHome3").setAttribute("style", "display: none;");
+
+    document.getElementById("ProgressHome1").setAttribute("style", "display: block; background-color: white; box-shadow: 0px 2px 25px silver;");
+    document.getElementById("Derzeitiges_ZielHome1").setAttribute("onclick", "hideFollowing ()");
+}
+
+function hideFollowing () {
+    var hideFollowing = document.getElementById("ProgressHome1").setAttribute("style", "display: none;");
+
+    var changeFunction = document.getElementById("Derzeitiges_ZielHome1").setAttribute("onclick", "showFollowing ()");
+}
+
+function showFollower () {
+    var hideFollowing = document.getElementById("ProgressHome1").setAttribute("style", "display: none;");
+    var hideReached = document.getElementById("ProgressHome3").setAttribute("style", "display: none;");
+
+    var showFollower = document.getElementById("ProgressHome2").setAttribute("style", "display: block; background-color: white; box-shadow: 0px 2px 25px silver;");
+    var changeFunction = document.getElementById("Derzeitiges_ZielHome2").setAttribute("onclick", "hideFollower ()");
+}
+
+function hideFollower () {
+    var hideFollower = document.getElementById("ProgressHome2").setAttribute("style", "display: none;");
+
+    var changeFunction = document.getElementById("Derzeitiges_ZielHome2").setAttribute("onclick", "showFollower ()");
+}
+
+function showReached () {
+    var hideFollowing = document.getElementById("ProgressHome1").setAttribute("style", "display: none;");
+    var hideFollower = document.getElementById("ProgressHome2").setAttribute("style", "display: none;");
+
+    var showReached = document.getElementById("ProgressHome3").setAttribute("style", "display: block; background-color: #a2e3c4; box-shadow: 0px 2px 25px silver;");
+    var changeFunction = document.getElementById("Derzeitiges_ZielHome3").setAttribute("onclick", "hideReached ()");
+}
+
+function hideReached () {
+    var hideReached = document.getElementById("ProgressHome3").setAttribute("style", "display: none;");
+
+    var changeFunction = document.getElementById("Derzeitiges_ZielHome3").setAttribute("onclick", "showReached ()");
+}
+
+function change (idForm) {
+    var show = document.getElementById(idForm).setAttribute("style", "display: grid;");
+}
+
+function hide (idForm) {
+    var hide = document.getElementById(idForm).setAttribute("style", "display: none;");
+}
+
+function showDetail (user) {
+    var show = document.getElementById(user).setAttribute("style", "display: grid;");
+}
+
+function hideDetail (user) {
+    var show = document.getElementById(user).setAttribute("style", "display: none;");
+}
+
+
+function showSecondarySelect() {
+    document.querySelectorAll('.hidden').forEach(function(element) {
+        element.style.display = 'none';
+    });
+
+    var selectedValue = document.getElementById('Selection').value;
+    if (selectedValue) {
+        document.getElementById('habitSelection' + selectedValue.slice(-1)).style.display = 'block';
+    }
+}
+
+function prepareForm() {
+    document.querySelectorAll('select[id^="secondarySelect"]').forEach(function(select) {
+        select.disabled = true;
+    });
+
+    var selectedValue = document.getElementById('Selection').value;
+    if (selectedValue) {
+        document.getElementById('habitSelection' + selectedValue.slice(-1)).querySelector('select').disabled = false;
+    }
+}
+
+
+    
+
+</script>
+
+<body>
+    <header>
+        <img class="HeadLogo" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo_Schriftzug.png" alt="">
+        <div class="dropdown" style="height: 10%;">    
+            <button id="LogIn">&#8285;</button>
+            <ul>
+                <li style="border: 2px solid lightgreen;"><a href="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You?uid={{ UID }}&pwd={{ Passwort }}" style=" color: lightgreen;">save changes</a></li>
+                <li onclick="change ('changeName')"><a>Username ändern</a></li>
+                <li onclick="change ('changePwd')"><a>Passwort ändern</a></li>
+                <li onclick="change ('changePic')"><a>Profilbild ändern</a></li>
+                <li onclick="change ('deletePic')"><a>Profilbild löschen</a></li>
+                <li onclick="change ('changeBio')"><a>Beschreibung ändern</a></li>
+                <li onclick="change ('changeMail')"><a>Email-Adresse ändern</a></li>
+                <li><a href="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Seiten/AboutUs.html">About us</a></li>
+                <li><a href="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Seiten/LogInpage.html">Log Out</a></li>
+            </ul>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('button').click(function(){
+                    $('ul').toggleClass('active')
+                })
+            })
+        </script>
+    </header>
+    <div id="changeName" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="text" name="changeName" placeholder="Neuer Username" id="changeEingabe">
+            <input type="submit" value="ändern" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('changeName')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="changePwd" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="text" name="changePwd" placeholder="Neues Passwort" id="changeEingabe">
+            <input type="submit" value="ändern" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('changePwd')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="changePic" style="display: none;">
+        <form method="post" id="formName" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="file" name="changePic" placeholder="Neues Profilbild" id="changeEingabe">
+            <input type="submit" value="ändern" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('changePic')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="postGoal" style="display: none;">
+        <form method="post" id="formName" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="file" name="postGoal" placeholder="Dein Ziel" id="changeEingabe">
+            <input type="submit" value="Posten" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('postGoal')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="deletePic" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="hidden" name="deletePic" value="0" id="changeEingabe">
+            <input type="submit" value="Aktuelles Bild löschen" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('deletePic')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="changeBio" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <textarea name="changeBio" placeholder="Neue Bio" id="changeEingabe"></textarea>
+            <input type="submit" value="ändern" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('changeBio')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="changeMail" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="email" name="changeMail" placeholder="Neue E-Mail" id="changeEingabe">
+            <input type="submit" value="ändern" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('changeMail')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="addGate" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <textarea name="addGate" placeholder="Neuer Meilenstein" id="changeEingabe"></textarea>
+            <input type="submit" value="Posten" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('addGate')">Abbrechen</button>
+        </form>
+    </div>
+    <div id="setHabit" style="display: none;">
+        <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="formName" onsubmit="prepareForm()">
+            <input type="hidden" name="uid" value="{{ UID }}">
+            <input type="hidden" name="pwd" value="{{ Passwort }}">
+            <input type="hidden" name="setHabit" value="True">
+            <div id="categ">
+                <label for="Selection">Wähle bitte eine Kategorie: </label>
+                <select name="habit" id="Selection" onchange="showSecondarySelect()">
+                    <option value="sports2">Sport</option>
+                    <option value="health3">Gesundheit</option>
+                    <option value="social4">Soziales</option>
+                    <option value="finance5">Finanzen</option>
+                </select>
+             </div>
+            <div id="habitSelection2" class="hidden">
+                <label for="secondarySelect1">Wähle deinen Habit in <br><strong>Sport</strong>:</label>
+                <select id="secondarySelect1" name="habitStep">
+                    <option value="Fussball">Fussball üben</option>
+                    <option value="Basketball">Basketball üben</option>
+                    <option value="Joggen">Joggen gehen</option>
+                    <option value="Krafttraining">Muskelaufbau vorantreiben</option>
+                </select>
+            </div>
+
+            <div id="habitSelection3" class="hidden">
+                <label for="secondarySelect2">Wähle deinen Habit in <br><strong>Gesundheit</strong>:</label>
+                <select id="secondarySelect2" name="habitStep">
+                    <option value="Wasser">Mehr Wasser trinken</option>
+                    <option value="Kochen">Kein FastFood mehr!</option>
+                    <option value="Reflexion">Selbstreflektion</option>
+                    <option value="Sweets">Keine Süssigkeiten mehr!</option>
+                </select>
+            </div>
+
+            <div id="habitSelection4" class="hidden">
+                <label for="secondarySelect3">Wähle deinen Habit in <br><strong>Soziales</strong>:</label>
+                <select id="secondarySelect3" name="habitStep">
+                    <option value="Netz">Netzwerk aufbauen</option>
+                    <option value="Pflege">Freundschaften pflegen</option>
+                    <option value="Ausgehen">Kontakte knüpfen</option>
+                </select>
+            </div>
+
+            <div id="habitSelection5" class="hidden">
+                <label for="secondarySelect4">Wähle deinen Habit in <br><strong>Finanzen</strong>:</label>
+                <select id="secondarySelect4" name="habitStep">
+                    <option value="Sparen">Polster aufbauen</option>
+                    <option value="Anlegen">Börsenwissen aneignen</option>
+                    <option value="Einkauf">Preisvergleich verinnerlichen</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Habit anlegen" id="formNameButtons">
+            <button type="reset" id="formNameButtons" onclick="hide ('setHabit')">Abbrechen</button>
+        </form>
+    </div>
+    
+    <div id="Homepage" style="display: block;">
+        <div id="ContentHome">
+            <div id="Personal_DataHome">
+                <div id="UsernameHome" style=" box-shadow: 0px 10px 5px gray;">
+                    <img src="{{ Profilbild }}" alt="" style="height: auto; width: 30%; border-radius: 30px; display: flex; margin: 2% 0;">
+                    <p id="NameHome">{{ Name }}</p> <br>
+                    <div id="BioHome">
+                        <p style="font-size: 70%; color: gray;">{{ Email }}    <strong>I</strong>    Registriert seit {{ Erstellungsdatum }}</p>
+                        {{ Bio }}
+                    </div>
+                </div>
+                <div id="GoalHome" style=" box-shadow: 0px 10px 5px gray; margin-top: 5%; width: 92%;">
+                    <!-- <p id="Label_Goal">Abgeschlossene Ziele:</p> -->
+                    <p id="Derzeitiges_ZielHome1" onclick="showFollowing ()" style="background: linear-gradient(lightcoral 50%, white 50%); width: 30%; line-height: 0.75; border-radius: 10px; color: white;">Following <br><br><strong style="color: black;">{{ Followingzahl }}</strong></p>
+                    <p id="Derzeitiges_ZielHome2" onclick="showFollower ()" style="background: linear-gradient(lightcoral 50%, white 50%); width: 30%; line-height: 0.75; border-radius: 10px; color: white;">Follower <br><br><strong style="color: black;">{{ Followerzahl }}</strong></p>
+                    <p id="Derzeitiges_ZielHome3" onclick="showReached ()" style="background-color: #a2e3c4; width: 30%; line-height: 0.75; border-radius: 10px;">Erfolge &#11088; <br><br><strong>{{ Erfolgszahl }}</strong></p>
+                </div>
+                <div id="ProgressHome1" style="display: none; background-color: white; box-shadow: 0px 2px 25px silver; overflow: auto; max-height: 350px;">
+                    <p id="Label_Progress" style="font-weight: bold;">Following:</p>
+                    {% for each in Followingliste %}
+                        <p id="followingLi">&#128279; {{ each }}<p>
+                    {% endfor %}
+                </div>
+
+                <div id="ProgressHome2" style="display: none; background-color: white; box-shadow: 0px 2px 25px silver; overflow: auto; max-height: 350px;">
+                    <p id="Label_Progress" style="font-weight: bold;">Follower:</p>
+                    {% for each in Followerliste %}
+                        <p id="followingLi">&#128279; {{ each }}<p>
+                    {% endfor %}
+                </div>
+
+                <div id="ProgressHome3" style="display: none; background-color: #a2e3c4; box-shadow: 0px 2px 25px silver; overflow: auto; max-height: 350px;">
+                    <p id="Label_Progress" style="font-weight: bold;">Erfolge &#11088;</p>
+                    {% for each in Erfolgsliste %}
+                        <p id="followingLi">{{ each }} <strong style="color: lightgreen;">&#x2714;</strong><p>
+                    {% endfor %}
+                </div>           
+            </div>
+            <div class="ScrollBereich">
+                {% if AktuellerHabitName != "" %}
+                <div id="PostHome" style="background-color: {{ BackgrC }}; box-shadow: 0px 10px 5px gray;">
+                    <div id="UsernameHome" style="background-color: {{ rowC }};">
+                        <p id="NameHome" style="font-size: 80%;">{{ AktuellerHabitName }}</p> <br>
+                    </div>
+                    <div id="GoalHome" style="background-color: {{ rowC }};">
+                        <p id="Label_Goal">Gates bis zum Ziel: </p><p id="Derzeitiges_ZielHome" style="color: white; background-color: {{ blockC }};">{{ AktuellerHabitDays }} Gates</p>
+                    </div>
+                    <div id="ProgressHome" style="background-color: {{ rowC }};">
+                        <p id="Label_Progress">Fortschritt:</p> <p id="Karotten" style="color: white; background-color: {{ blockC }};"><strong id="count">{{ AktuellerHabitCDays }}</strong> / {{ AktuellerHabitDays }} &#129365;</p>
+                        {% if ifTrue == "0" and Abschlussfoto == "" %}
+                        <p id="Add_Progress" onclick="change ('addGate')" style="cursor: pointer; border: none; box-shadow: 0 10px 5px gray; text-align: center;">+ &#129365; hinzufügen</p>
+                        {% elif ifTrue == "1" and Abschlussfoto == "" %}
+                        <p id="Add_Progress" onclick="change ('postGoal')" style="cursor: pointer; border: none; box-shadow: 0 10px 5px gray; color: white; text-align: center; white; background-color: #a2e3c4; font-weight: bold;">Zeig's uns!</p>
+                        {% else %}
+                        <p id="Add_Progress" style="background-color: #a2e3c4; color: white; border: none; box-shadow: 0 10px 5px gray; text-align: center;">Gut gemacht &#129395;</p>
+                        {% endif %}
+                        <div id="TextPosts">
+                            {% for item in AktuellerHabitDayPosts %}
+                            <p id="Aktueller_Stand">&#129365; : {{ item }}</p>
+                            <!-- <p>Gepostet am {{ postDay }} um {{ postTime }}</p> -->
+                            {% endfor %}
+                        </div>
+                        {% if Abschlussfoto != "" %}
+                        <div id="TextPosts" style="display: grid; justify-content: center;">
+                            <img src="{{ Abschlussfoto }}" alt="Abschlussfoto" style="width: 100%; border-radius: 10px;">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get">
+                    <input type="hidden" name="uid" value="{{ UID }}">
+                    <input type="hidden" name="pwd" value="{{ Passwort }}">
+                    <input type="hidden" name="setHabit" value="resetHabit">       
+                    <button type="submit" id="PostHome" style="background-color: #d3d3d3; color: white; font-weight: bold; font-size: 140%; width: 100%; border: none; box-shadow: 0px 10px 5px gray; cursor: pointer;">
+                        Gewohnheit erreicht &#9989;
+                    </button>
+                </form>
+                {% else %}
+                <p onclick="change ('setHabit')" id="PostHome" style="background-color: #d3d3d3; color: white; font-weight: bold; font-size: 140%; width: 100%; border: none; box-shadow: 0px 10px 5px gray; cursor: pointer; text-align: center; width: 94%;">
+                    + Neue Gewohnheit anlegen
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="Mainpage" style="display: none;">
+        <div id="ContentMain">
+            <div class="ScrollBereichMain">
+                {% for card in FollowingCards %}
+                {% if card.habitName != "" %}
+                <div id="PostMain" style="background-color: {{ card.postBackC }}; box-shadow: 0px 10px 5px gray;">
+                    <div id="UsernameMain" style="background-color: {{ card.postRowC }};">
+                        <p id="NameMain">{{ card.name }}</p> <br>
+                        <!-- Bei "Hase_Fortschritt" wird der Fortschrittstatus über die Margin-Werte bestimmt. Margin-Left ist der Fortschritt des Hasen-Bildes, margin-right ist der Wert, den die Karotte als Abstand vom Hasen hat. Beide zusammen müssen 80% ergeben, da es sich sonst in der mobilen Ansicht in eine neue Zeile verschiebt 
+                        <img id="Hase_FortschrittMain" style="margin-left: 20%; margin-right: 60%;" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Hase_Rechts.png" alt=""> 
+                        <p id="Emoji_KarotteMain">&#129365;</p>-->
+                    </div>
+                    <div id="GoalMain" style="background-color: {{ card.postRowC }};">
+                        <p id="Label_GoalMain">Derzeitiges Ziel:</p><p id="Derzeitiges_ZielMain" style="font-weight: bold; margin-left:2%; background-color: {{ card.postBlockC }};"> {{ card.habitName }}</p>
+                    </div>
+                    <div id="ProgressMain" style="background-color: {{ card.postRowC }};">
+                        <p id="Label_ProgressMain">Fortschritt:</p> <p id="Karotten" style="background-color: {{ card.postBlockC }};">{{ card.currentDays }} / {{ card.days }} &#129365;</p>
+                        <div id="TextPostsMain" style="display: grid; justify-content: center;">
+                            {% for Post in card.dayPosts %}
+                            <p id="Aktueller_StandMain">&#129365; : {{ Post }} </p>
+                            <!-- <p>Gepostet am {{ card.postDay }} um {{ card.postTime }}</p> -->
+                            {% endfor %}
+                            {% if card.Foto != "" %}
+                            <img src="{{ card.Foto }}" alt="Abschlussfoto" style="width: 100%; border-radius: 10px;">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div id="PostMain">
+                    <div id="UsernameMain">
+                        <p id="NameMain">{{ card.name }}</p> <br>
+                        <!-- Bei "Hase_Fortschritt" wird der Fortschrittstatus über die Margin-Werte bestimmt. Margin-Left ist der Fortschritt des Hasen-Bildes, margin-right ist der Wert, den die Karotte als Abstand vom Hasen hat. Beide zusammen müssen 80% ergeben, da es sich sonst in der mobilen Ansicht in eine neue Zeile verschiebt -->
+                    </div>
+                    <div id="GoalMain">
+                        <p id="Label_GoalMain">Faulenzen &#128564;</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div id="Searchpage" style="display: none;">
+        <div id="ContentSearch">
+            <div id="Personal_DataSearch">
+                <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" id="Searchform">
+                    <input type="hidden" name="uid" value="{{ UID }}">
+                    <input type="hidden" name="pwd" value="{{ Passwort }}">
+                    <input type="text" id="UsernameSearch" name="searchName" placeholder="search">
+                    <button id="sort" type="submit" style="float: right; background-color: #e2f0d9; border: 4px solid #a4c3b2; height: 0%; position: relative; top: -3px;">Go!</button>
+                    <button id="sort" type="submit" value="" style="float: right; background-color: #f08080; border: 4px solid #ea7470; height: 0%; position: relative; top: -3px;">Löschen</button>
+                </form>
+            </div>
+            <div class="ScrollBereich" style="margin-top: 15%;">
+                    {% for user in SearchContainer %}
+                        {% if user.username != "" %}
+                            {% if user.username != "Rhabit-User" %}
+                <div id="PostSearch" style="background-color: white;">
+                                {% if user.Profilbild != "0" %}
+                    <img id="ProfilbildSearch" src="{{ user.Profilbild }}" alt="Profilbild">
+                                {% else %}
+                    <img id="ProfilbildSearch" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo.png" alt="Profilbild">
+                                {% endif %}
+                    <p id="NameSearch">{{ user.username }}</p>
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <div style="display: flex; justify-content: center; width: 50%;">
+                            <p onclick="showDetail ('{{ user.username }}')" id="Derzeitiges_ZielSearch" style="color: white; background-color: #fca311; box-shadow: 0 5px 5px 0px gray; cursor: pointer; width: 100%; border: none; margin: 3.5%;">show</p>
+                        </div>
+                            {% if user.uid in user.folgend %}
+                    <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" style="display: flex; width: 50%; justify-content: center;">
+                        <input type="hidden" name="uid" value="{{ UID }}">
+                        <input type="hidden" name="pwd" value="{{ Passwort }}">
+                        <input type="hidden" name="unFollow" value="{{ user.filename }}">    
+                        <button type="submit" id="Derzeitiges_ZielSearch" style="color: white; background-color: lightgreen; box-shadow: inset 0 5px 5px 0px gray; cursor: pointer; width: 100%; border: none; margin: 3.5%;">gefolgt</button>
+                    </form>        
+                            {% else %}
+                    <form action="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/RHabit/You" method="get" style="display: flex; width: 50%; justify-content: center;">
+                        <input type="hidden" name="uid" value="{{ UID }}">
+                        <input type="hidden" name="pwd" value="{{ Passwort }}">
+                        <input type="hidden" name="wantToFollow" value="{{ user.filename }}">    
+                        <button type="submit" id="Derzeitiges_ZielSearch" style="color: white; background-color: lightcoral; box-shadow: 0 5px 5px 0px gray; cursor: pointer; width: 100%; border: none; margin: 3.5%;">follow</button>
+                    </form>        
+                            {% endif %}
+                    </div>
+                </div>
+                <div id="{{ user.username }}" style="display: none;">
+                    <div id="searchUserDetails" style="display: grid; justify-content: center;">
+                        <div id="ContentHome" style="background-color: #e9ecef; border-radius: 20px; border: 3px solid lightgreen; min-height: fit-content; margin: 0 2%;">
+                            <p onclick="hideDetail('{{ user.username }}')" style="background-color: white; color: gray; font-size: 120%; float: right; border-radius: 20px; padding: 1% 5%; border: 3px solid #fca311; box-shadow: 0 10px 5px gray; margin-right: -6%; margin-top: -5%; cursor: pointer;">close</p>
+                            <div id="Personal_DataHome">
+                                <div id="UsernameHome" style=" box-shadow: 0px 10px 5px gray;">
+                                    {% if user.Profilbild != "" %}
+                                    <img src="{{ user.Profilbild }}" alt="" style="height: auto; width: 30%; border-radius: 30px; display: flex; margin: 2% 0;">
+                                    {% else %}
+                                    <img id="ProfilbildSearch" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Logo.png" alt="Profilbild">
+                                    {% endif %}
+                                    <p id="NameHome">{{ user.username }}</p> <br>
+                                    <div id="BioHome">
+                                        <p style="font-size: 70%; color: gray;">{{ user.email }}    <strong>I</strong>    Registriert seit {{ user.erstellt }}</p>
+                                        {{ user.bio }}
+                                    </div>
+                                </div>
+                                <div id="GoalHome" style=" box-shadow: 0px 10px 5px gray; margin-top: 5%; min-height: none;">
+                                    <!-- <p id="Label_Goal">Abgeschlossene Ziele:</p> -->
+                                    <p id="Derzeitiges_ZielHome1" style="background: linear-gradient(lightcoral 50%, white 50%); width: 30%; line-height: 0.75; border-radius: 10px; color: white;">Following <br><br><strong style="color: black;">{{ user.gefolgtZahl }}</strong></p>
+                                    <p id="Derzeitiges_ZielHome2" style="background: linear-gradient(lightcoral 50%, white 50%); width: 30%; line-height: 0.75; border-radius: 10px; color: white;">Follower <br><br><strong style="color: black;">{{ user.folgendZahl }}</strong></p>
+                                    <p id="Derzeitiges_ZielHome3" style="background-color: #a2e3c4; width: 30%; line-height: 0.75; border-radius: 10px;">Erfolge &#11088; <br><br><strong>{{ user.habitZahl }}</strong></p>
+                                </div>
+                                
+                                <div id="ProgressHome1" style="display: block; background-color: white; box-shadow: 0px 2px 25px silver; overflow: auto; height: 150px;">
+                                    <p id="Label_Progress" style="font-weight: bold;">Following:</p>
+                                    {% for each in user.gefolgt %}
+                                        <p id="followingLi">&#128279; {{ each }}<p>
+                                    {% endfor %}
+                                </div>
+                
+                                <div id="ProgressHome2" style="display: block; background-color: white; box-shadow: 0px 2px 25px silver; overflow: auto; height: 150px;">
+                                    <p id="Label_Progress" style="font-weight: bold;">Follower:</p>
+                                    {% for each in user.folgend %}
+                                        <p id="followingLi">&#128279; {{ each }}<p>
+                                    {% endfor %}
+                                </div>
+                
+                                <div id="ProgressHome3" style="display: block; background-color: #a2e3c4; box-shadow: 0px 2px 25px silver; overflow: auto; height: 150px;">
+                                    <p id="Label_Progress" style="font-weight: bold;">Erfolge &#11088;</p>
+                                    {% for each in user.habits %}
+                                        <p id="followingLi">{{ each }} <strong style="color: lightgreen;">&#x2714;</strong><p>
+                                    {% endfor %}
+                                </div>    
+                                      
+                            </div>
+                            <div class="ScrollBereich">
+                                {% if user.currentHabit != "" %}
+                                <div id="PostHome" style="background-color: {{ user.backgrC }}; box-shadow: 0px 10px 5px gray;">
+                                    <div id="UsernameHome" style="background-color: {{ user.rowC }};">
+                                        <p id="NameHome" style="font-size: 80%;">{{ user.currentHabit }}</p> <br>
+                                    </div>
+                                    <div id="GoalHome" style="background-color: {{ user.rowC }};">
+                                        <p id="Label_Goal">Zeit bis zum Ziel: </p><p id="Derzeitiges_ZielHome" style="color: white; background-color: {{ user.blockC }};">{{ user.currentdays }} Tage</p>
+                                    </div>
+                                    <div id="ProgressHome" style="background-color: {{ user.rowC }};">
+                                        <p id="Label_Progress">Fortschritt:</p> <p id="Karotten" style="color: white; background-color: {{ user.blockC }};"><strong id="count">{{ user.currentCdays }}</strong> / {{ user.currentdays }} &#129365;</p>
+                                        <div id="TextPosts">
+                                            {% for item in user.currentDayPosts %}
+                                            <p id="Aktueller_Stand">&#129365; : {{ item }}</p>
+                                            <!-- <p>Gepostet am {{ postDay }} um {{ postTime }}</p> -->
+                                            {% endfor %}
+                                        </div>
+                                        {% if user.finalPost != "" %}
+                                        <div id="TextPosts" style="display: grid; justify-content: center;">
+                                            <img src="{{ user.finalPost }}" alt="Abschlussfoto" style="width: 100%; border-radius: 10px;">
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% else %}
+                                <button id="PostHome" style="background-color: #d3d3d3; color: white; font-weight: bold; font-size: 140%; width: 100%; border: none; box-shadow: 0px 10px 5px gray; cursor: pointer;">
+                                    Keine aktuellen Gewohnheiten 
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="NavigationContainer">
+            <div id="circle1" style="height: 60px; width: 60px; border-radius: 35px; margin: -20px 25px; background-color: #cce3de; border: 5px solid #a4c3b2; box-shadow: 0px 15px 25px silver;" onclick="HomePage ()"><img id="Haussymbol" style="height: 55px;" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Home_Symbol.png" alt=""></div>
+            <div id="circle2" onclick="MainPage ()"><img id="Hasensymbol" style="height: 25px;" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Main_Symbol.png" alt=""></div>
+            <div id="circle3" onclick="SearchPage ()"><img id="Suchensymbol" style="height: 25px;" src="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]/RHabit/Bilder/Search_Symbol.png" alt=""></div>
+        </div>    
+    </footer>
+</body>
+</html>

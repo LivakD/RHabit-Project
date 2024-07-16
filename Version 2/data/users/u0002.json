@@ -1,0 +1,44 @@
+{
+  "name": "Ar00j24",
+  "email": "ar00j24@mail.com",
+  "pwd": "schweresPasswort123",
+  "creation": "2024-05-31",
+  "bio": "Kreativer Text von Arooj...",
+  "picture": false,
+  "followers": [
+    "u0001",
+    "u0003",
+    "u0000"
+  ],
+  "following": [
+    "u0000",
+    "u0001",
+    "u0003"
+  ],
+  "currentHabits": [
+    {
+      "name": "Arooj Test Habit",
+      "startDate": "2024-06-14",
+      "endDate": "2024-06-20",
+      "milestones": [
+        {
+          "content": "Erster Tag",
+          "completedDate": "2024-06-15"
+        },
+        {
+          "content": "Zweiter Tag",
+          "completedDate": "2024-06-16"
+        },
+        {
+          "content": "Dritter Tag",
+          "completedDate": "2024-06-17"
+        },
+        {
+          "content": "Vierter Tag",
+          "completedDate": "2024-06-18"
+        }
+      ]
+    }
+  ],
+  "habits": []
+}

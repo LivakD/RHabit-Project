@@ -1,0 +1,43 @@
+{
+  "name": "KaiDerHai",
+  "email": "kaiderhai@mail.com",
+  "pwd": "schweresPasswort123",
+  "creation": "2024-05-31",
+  "bio": "Kreativer Text von Kai...",
+  "picture": false,
+  "followers": [
+    "u0001",
+    "u0002"
+  ],
+  "following": [
+    "u0000",
+    "u0001",
+    "u0002"
+  ],
+  "currentHabits": [
+    {
+      "name": "Kai Test Habit",
+      "startDate": "2024-06-14",
+      "endDate": "2024-06-20",
+      "milestones": [
+        {
+          "content": "Erster Tag",
+          "completedDate": "2024-06-15"
+        },
+        {
+          "content": "Zweiter Tag",
+          "completedDate": "2024-06-16"
+        },
+        {
+          "content": "Dritter Tag",
+          "completedDate": "2024-06-17"
+        },
+        {
+          "content": "Vierter Tag",
+          "completedDate": "2024-06-18"
+        }
+      ]
+    }
+  ],
+  "habits": []
+}

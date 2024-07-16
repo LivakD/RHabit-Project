@@ -1,0 +1,35 @@
+{
+  "name": "Dennis",
+  "email": "dennis@mail.com",
+  "pwd": "schweresPasswort123",
+  "creation": "2024-05-31",
+  "bio": "Kreativer Text von Dennis...",
+  "picture": false,
+  "followers": [
+    "u0001",
+    "u0002",
+    "u0003"
+  ],
+  "following": [
+    "u0001",
+    "u0002"
+  ],
+  "currentHabits": [
+    {
+      "name": "Dennis Test Habit",
+      "startDate": "2024-06-14",
+      "endDate": "2024-06-20",
+      "milestones": [
+        {
+          "content": "Erster Tag",
+          "completedDate": "2024-06-15"
+        },
+        {
+          "content": "Zweiter Tag",
+          "completedDate": "2024-06-16"
+        }
+      ]
+    }
+  ],
+  "habits": []
+}
